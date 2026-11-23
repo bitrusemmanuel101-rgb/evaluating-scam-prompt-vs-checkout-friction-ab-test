@@ -1,0 +1,16 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "fintech_ab_test.db",
+            "name": "extact"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "data\\fintech_ab_test.db",
+            "name": "data extract"
+        }
+    ]
+}

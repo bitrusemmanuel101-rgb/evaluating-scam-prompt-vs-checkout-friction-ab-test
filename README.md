@@ -8,6 +8,10 @@ To reduce Authorized Push Payment (APP) fraud on instant transfers, the product 
 * **Guardrail Impact (Checkout Friction):** Legitimate transfer abandonment increased by **1.35 percentage points** (from **2.77%** to **4.12%**, p < 0.001).
 * **Net Financial ROI:** Prevented **\$108,752.15** in fraud reimbursement losses against **\$1,350.59** in lost transaction fees—delivering a **net financial benefit of +\$107,401.57** over the test window.
 
+
+
+[View Executive Summary](visuals/executive-summary.png)
+
 ---
 
 ## 1. Business Problem & Hypothesis
@@ -67,24 +71,5 @@ This project mirrors an end-to-end product analytics workflow across SQL and Pyt
 * **Python:** `pandas`, `numpy`, `statsmodels` (two-proportion $z$-tests), `scipy.stats` (confidence intervals)
 
 
-# A/B Test Analysis: Balancing Scam Warning Prompts vs. Checkout Friction
 
-### 1. Business Context & Problem Statement
-Authorized Push Payment (APP) fraud is a major financial liability for digital banks and instant-transfer platforms. When customers are tricked into authorizing fraudulent transfers, banks face direct reimbursement costs and reputational damage. 
-
-To combat this, the product team proposed adding a behavioral warning screen (*"Stop: Could this transfer be a scam?"*) before high-risk instant transfers. However, introducing extra checkout friction risks frustrating legitimate customers and causing them to abandon valid transfers—directly reducing transaction fee revenue.
-
-### 2. Experiment Design & Dataset
-* **Source Data:** Extracted and joined via SQL from three production logging tables (`experiment_assignments`, `transfer_events`, and `fraud_reports`), yielding **20,000 user transfer records**.
-* **Traffic Split:** 50/50 randomized split between:
-  * **Control (`n = 10,012`):** Standard instant-transfer flow (no warning prompt).
-  * **Treatment (`n = 9,988`):** Transfer flow with the behavioral scam warning screen.
-* **Methodology Note:** In a live production lifecycle, this analysis begins prior to test launch with a **pre-test power analysis** on historical baseline logs to establish the required sample size and test duration. This notebook picks up at the post-experiment evaluation stage once the target sample has been collected.
-
-### 3. Evaluation Framework
-To make a data-driven launch recommendation, this analysis evaluates two competing metrics using two-proportion $z$-tests ($\alpha = 0.05$) followed by a unit-economics ROI assessment:
-1. **Primary Success Metric (Fraud Prevention):** Does the warning screen significantly reduce the rate of completed scam transfers?
-2. **Guardrail Metric (Checkout Friction):** Does the warning screen significantly increase the abandonment rate among legitimate users?
-3. **Business ROI:** Does the dollar value of prevented fraud outweigh the transaction fee revenue (1.5%) lost from abandoned legitimate transfers?
-4. 
 *Author: Emmanuel Bitrus*
